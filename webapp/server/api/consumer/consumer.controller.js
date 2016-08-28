@@ -1,6 +1,6 @@
 'use strict';
 
-import User from './consumer.model';
+import Consumer from './consumer.model';
 import passport from 'passport';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
@@ -20,7 +20,7 @@ function handleError(res, statusCode) {
 }
 
 /**
- * Get list of users
+ * Get list of consumers
  * restriction: 'admin'
  */
 export function index(req, res) {
@@ -32,7 +32,7 @@ export function index(req, res) {
 }
 
 /**
- * Creates a new user
+ * Creates a new consumer
  */
 export function create(req, res, next) {
   var newUser = new Consumer(req.body);
@@ -65,7 +65,7 @@ export function create(req, res, next) {
 }
 
 /**
- * Get a single user
+ * Get a single consumer
  */
 export function show(req, res, next) {
   var userId = req.params.id;
@@ -81,7 +81,7 @@ export function show(req, res, next) {
 }
 
 /**
- * Deletes a user
+ * Deletes a consumer
  * restriction: 'admin'
  */
 export function destroy(req, res) {
@@ -93,7 +93,7 @@ export function destroy(req, res) {
 }
 
 /**
- * Change a users password
+ * Change a consumers password
  */
 export function changePassword(req, res, next) {
   var userId = req.user._id;

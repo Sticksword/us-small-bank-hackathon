@@ -19,8 +19,8 @@ export function index(req, res) {
  */
 export function submitPayment(req, res) {
     client.payment.create({
-        amount : "1000",
-        token : "[TOKEN ID]",
+        amount : "500",
+        token : req.body.simplifyToken,
         description : "payment description",
         reference : "7a6ef6be31",
         currency : "USD"
