@@ -65,6 +65,10 @@ app.post('/', function(req, res) {
   res.send('SUCCESS');
 });
 
+app.get('/fb', function (req, res) {
+  res.sendFile(__dirname + '/fb-test.html');
+});
+
 /*========================================================
  * Create user
 ========================================================*/
