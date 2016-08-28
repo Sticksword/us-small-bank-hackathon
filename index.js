@@ -4,13 +4,10 @@
 
 var firebase = require("firebase");
 
-var config = {
-  apiKey: "AIzaSyCrCzugh4uMYfK1cRLWA0PCO4bEceal270",
-  authDomain: "hack-small-db.firebaseapp.com",
-  databaseURL: "https://hack-small-db.firebaseio.com",
-  storageBucket: "hack-small-db.appspot.com",
-};
-firebase.initializeApp(config);
+firebase.initializeApp({
+  serviceAccount: "hack-small-DB-da827136648c.json",
+  databaseURL: "https://hack-small-db.firebaseio.com"
+});
 
 // Get a reference to the database service
 var database = firebase.database();
@@ -35,6 +32,10 @@ var Simplify = require("simplify-commerce"),
 var express = require('express');
 var app = express();
 
+var bodyParser = require('body-parser');
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+
 /*========================================================
  * Routes
 ========================================================*/ 
@@ -46,7 +47,7 @@ app.get('/', function (req, res) {
 app.post('/', function(req, res) {
   client.payment.create({
     amount : "1000",
-    token : "[TOKEN ID]",
+    token : req.body.simplifyToken,
     description : "payment description",
     reference : "7a6ef6be31",
     currency : "USD"
@@ -63,6 +64,24 @@ app.post('/', function(req, res) {
   });
   res.send('SUCCESS');
 });
+
+/*========================================================
+ * Create user
+========================================================*/
+
+app.post('/api/coupon', function(req, res) {
+  createCoupon(req.body.couponID, req.body.type, req.body.amount, req.body.expiration, req.body.businessID);
+  res.send('SUCCESS!');
+});
+
+function createCoupon(couponID, type, amount, expiration, businessID) {
+  firebase.database().ref('coupons/' + couponID).set({
+    type: type,
+    amount: amount,
+    expiration: expiration,
+    businessID: businessID
+  });
+}
 
 /*========================================================
  * Start App
