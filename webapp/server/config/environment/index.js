@@ -45,6 +45,11 @@ var all = {
     clientID:     process.env.FACEBOOK_ID || 'id',
     clientSecret: process.env.FACEBOOK_SECRET || 'secret',
     callbackURL:  (process.env.DOMAIN || '') + '/auth/facebook/callback'
+  },
+
+  simplify: {
+    publicKey: process.env.SIMPLIFY_PUB_KEY,
+    privateKey: process.env.SIMPLIFY_PRIV_KEY
   }
 };
 

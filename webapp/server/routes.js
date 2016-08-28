@@ -8,9 +8,18 @@ import errors from './components/errors';
 import path from 'path';
 
 export default function(app) {
+  // app.use(function (req, res, next) {
+  //   res.cookie('XSRF-TOKEN', req.csrfToken());
+  //   res.locals.csrftoken = req.csrfToken();
+  //   next();
+  // });
+  
   // Insert routes below
   app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
+
+  app.use('/api/payment', require('./api/payment'));
+  app.use('/api/coupon', require('./api/coupon'));
 
   app.use('/auth', require('./auth').default);
 

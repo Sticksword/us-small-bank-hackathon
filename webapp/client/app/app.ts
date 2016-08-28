@@ -3,6 +3,7 @@
 angular.module('webappApp', [
   'webappApp.auth',
   'webappApp.admin',
+  'webappApp.payment',
   'webappApp.constants',
   'ngCookies',
   'ngResource',
