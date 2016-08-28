@@ -19,7 +19,16 @@ class HomeController {
       addCoupon: function() {
         console.log('add coupon');
         $scope.coupons.push({ name: 'new coupon!' });
-        $http.post('/api/coupons', { name: 'new test coupon' });
+        $http.post('/api/coupon', { type: 0, discount: 5, description: 'new test coupon!' });
+      }
+
+      deleteCoupon: function(thing) {
+        console.log('delete coupon');
+        var index = $scope.coupons.indexOf(thing);
+        if (index > -1) {
+          $scope.coupons.splice(index, 1);
+        }
+        $http.delete('/api/coupon/123');
       }
     };
 
@@ -27,10 +36,7 @@ class HomeController {
 
 
 
-  deleteCoupon(thing) {
-    console.log('delete coupon');
-    $http.delete('/api/coupons/' + thing._id);
-  }
+
 
 }
 
