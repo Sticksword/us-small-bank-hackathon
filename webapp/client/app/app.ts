@@ -4,6 +4,7 @@ angular.module('webappApp', [
   'webappApp.auth',
   'webappApp.admin',
   'webappApp.payment',
+  'webappApp.home',
   'webappApp.constants',
   'ngCookies',
   'ngResource',
