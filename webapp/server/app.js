@@ -23,7 +23,8 @@ if (config.seedDB) { require('./config/seed'); }
 // Setup server
 var app = express();
 
-var expressCsrf = express.csrf();
+var csrf = require('csurf');
+var csrfProtection = csrf({ cookie: true });
 var customCsrf = function (req, res, next) {
     // I assume exact match, but you can use regex match here
   var csrfEnabled = true;
@@ -32,8 +33,12 @@ var customCsrf = function (req, res, next) {
     csrfEnabled = false;
   }
 
+  console.log('the req path:');
+  console.log(req.path);
+
   if (csrfEnabled) {
-    expressCsrf(req, res, next);
+    app.use(csrfProtection);
+    console.log('using protection!!');
   } else {
     next();
   }
