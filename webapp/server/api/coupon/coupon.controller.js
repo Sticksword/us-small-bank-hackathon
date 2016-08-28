@@ -1,12 +1,28 @@
 'use strict';
-import config from '../../config/environment';
+import _ from 'lodash';
 import Coupon from './coupon.model';
+
+function respondWithResult(res, statusCode) {
+  statusCode = statusCode || 200;
+  return function(entity) {
+    if (entity) {
+      res.status(statusCode).json(entity);
+    }
+  };
+}
+
+function handleError(res, statusCode) {
+  statusCode = statusCode || 500;
+  return function(err) {
+    res.status(statusCode).send(err);
+  };
+}
 
 /**
  * testing base page
  */
 export function index(req, res) {
-    res.send('base coupon api working!');
+    res.send('base coupon api workings!');
 }
 
 // Creates a new Thing in the DB

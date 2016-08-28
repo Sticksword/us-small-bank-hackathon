@@ -38,6 +38,22 @@ export function create(req, res, next) {
   var newUser = new User(req.body);
   newUser.provider = 'local';
   newUser.role = 'user';
+
+  var FB = require('fb');
+  var access_token = 'EAACEdEose0cBAOZBkQDEMOPmcJLS2wBvFkVZCKMS5dBaZCfIb8iME4hcU9eIucbxHND59oYckWpmr6BNfZBDMz7ffsbQM49fpC5LJnbPbVyuWxKLCPJHxoL1jjZBCpvmnbL1lVGMUKP3k2UDPZC27Kgrttc2moeuV7KJTmb2Qnxz80LdLebW9P';
+  // var access_token = req.params.access_token;
+  FB.setAccessToken(access_token);
+  FB.api('me/accounts', 'get', function (res) {
+    if(!res || res.error) {
+      console.log(!res ? 'error occurred' : res.error);
+      return;
+    }
+    if(!res.data[0])
+      return;
+    newUser.name = res.data[0].name;
+    newUser.id = res.data[0].id;
+  });
+
   newUser.save()
     .then(function(user) {
       var token = jwt.sign({ _id: user._id }, config.secrets.session, {
