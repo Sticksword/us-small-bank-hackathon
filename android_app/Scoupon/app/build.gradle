@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.scoupon.jacek.scoupon"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -29,4 +29,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.android.support:design:23.4.0'
+    compile 'com.simplify:simplify-android:3.0.0'
+    compile 'com.mcxiaoke.volley:library-aar:1.0.0'
 }

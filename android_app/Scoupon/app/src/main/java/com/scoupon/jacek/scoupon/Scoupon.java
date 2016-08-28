@@ -16,12 +16,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class Main2Activity extends AppCompatActivity {
+public class Scoupon extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -81,40 +82,6 @@ public class Main2Activity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        public PlaceholderFragment() {
-        }
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main2_coupons, container, false);
-            //TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
-    }
 
 
     public static class LikesFragment extends Fragment {
@@ -122,21 +89,17 @@ public class Main2Activity extends AppCompatActivity {
          * The fragment argument representing the section number for this
          * fragment.
          */
+
+        private GridView gridView;
+
         private static final String ARG_SECTION_NUMBER = "section_number";
-        private ArrayList<String> likes = new ArrayList<>();
-        private ListView listView;
 
         public LikesFragment() {
-            likes.add("Afsdfsdf");
-            likes.add("Basdfa");
-            likes.add("Cfadsfwefe");
+
         }
 
         private void refresh() {
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                    android.R.layout.simple_list_item_1, likes);
-            listView.setAdapter(adapter);
         }
 
         /**
@@ -155,9 +118,8 @@ public class Main2Activity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main2_likes, container, false);
-            //TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            listView = (ListView)rootView.findViewById(R.id.listView);
+            gridView = (GridView)rootView.findViewById(R.id.gridView);
+            gridView.setAdapter(new BusinessTileAdapter(getActivity()));
             refresh();
             return rootView;
         }
@@ -168,9 +130,25 @@ public class Main2Activity extends AppCompatActivity {
          * The fragment argument representing the section number for this
          * fragment.
          */
+
+        private ArrayList<String> likes = new ArrayList<>();
+        private ListView listView;
+
         private static final String ARG_SECTION_NUMBER = "section_number";
 
         public CouponsFragment() {
+            likes.add("Afsdfsdf");
+            likes.add("Basdfa");
+            likes.add("Cfadsfwefe");
+        }
+
+
+        private void refresh() {
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                    R.layout.coupon_layout, likes);
+            //listView.setAdapter(adapter);
+            listView.setAdapter(new CouponAdapter(getActivity(), 2));
         }
 
         /**
@@ -189,8 +167,8 @@ public class Main2Activity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main2_coupons, container, false);
-            //TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            listView = (ListView)rootView.findViewById(R.id.listView2);
+            refresh();
             return rootView;
         }
     }

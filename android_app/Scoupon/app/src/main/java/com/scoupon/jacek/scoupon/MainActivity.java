@@ -2,18 +2,13 @@ package com.scoupon.jacek.scoupon;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.PersistableBundle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 
@@ -35,7 +30,7 @@ public class MainActivity extends Activity {
                     public void onSuccess(LoginResult loginResult) {
                         // App code
                         Log.d("login", "success");
-                        Intent intent = new Intent(MainActivity.this,  Main2Activity.class);
+                        Intent intent = new Intent(MainActivity.this,  Scoupon.class);
                         startActivity(intent);
                         finish();
                     }
@@ -51,6 +46,7 @@ public class MainActivity extends Activity {
                     public void onError(FacebookException exception) {
                         // App code
                         Log.d("login", "error");
+                        Log.d("login", exception.toString());
 
                     }
                 });
