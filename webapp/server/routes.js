@@ -19,6 +19,7 @@ export default function(app) {
   app.use('/api/users', require('./api/user'));
 
   app.use('/api/payment', require('./api/payment'));
+  app.use('/api/coupon', require('./api/coupon'));
 
   app.use('/auth', require('./auth').default);
 
