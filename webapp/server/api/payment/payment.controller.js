@@ -35,7 +35,8 @@ export function submitPayment(req, res) {
      
         console.log("Payment Status: " + data.paymentStatus);
     });
-    res.send('success!');
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify({ message: 'Success!' }));
 }
 
 
