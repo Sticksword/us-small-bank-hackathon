@@ -1,6 +1,8 @@
 <div class="container">
 <h1>Charge $10 with Simplify Commerce</h1>
 <form id="simplify-payment-form" action="/api/payment/submitPayment" method="POST">
+    
+    <input type="hidden" name="_csrf" value="<%= csrftoken %>">
     <!-- The $10 amount is set on the server side -->
     <div>
         <label>Credit Card Number: </label>

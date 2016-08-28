@@ -22,6 +22,23 @@ if (config.seedDB) { require('./config/seed'); }
 
 // Setup server
 var app = express();
+
+var expressCsrf = express.csrf();
+var customCsrf = function (req, res, next) {
+    // I assume exact match, but you can use regex match here
+  var csrfEnabled = true;
+  var whiteList = new Array("/payment","/api/payment/submitPayment","/api/coupon/");
+  if (whiteList.indexOf(req.path) != -1) {
+    csrfEnabled = false;
+  }
+
+  if (csrfEnabled) {
+    expressCsrf(req, res, next);
+  } else {
+    next();
+  }
+}
+
 var server = http.createServer(app);
 var socketio = require('socket.io')(server, {
   serveClient: config.env !== 'production',
