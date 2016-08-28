@@ -1,6 +1,6 @@
 <div class="container">
 <h1>Charge $10 with Simplify Commerce</h1>
-<form id="simplify-payment-form" action="" method="POST">
+<form id="simplify-payment-form" action="/api/payment/submitPayment" method="POST">
     <!-- The $10 amount is set on the server side -->
     <div>
         <label>Credit Card Number: </label>
@@ -79,7 +79,7 @@
             $("#process-payment-btn").attr("disabled", "disabled");
             // Generate a card token & handle the response
             SimplifyCommerce.generateToken({
-                key: "YOUR_PUBLIC_KEY",
+                key: "sbpb_YWE1NDE2ZjYtZWJmMi00MmZlLTllMGYtOTcwZjk5NDhiODcy",
                 card: {
                     number: $("#cc-number").val(),
                     cvc: $("#cc-cvc").val(),

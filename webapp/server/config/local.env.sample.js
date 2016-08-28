@@ -12,6 +12,7 @@ module.exports = {
   FACEBOOK_ID:      'app-id',
   FACEBOOK_SECRET:  'secret',
 
+
   // Control debug level for modules using visionmedia/debug
   DEBUG: ''
 };
