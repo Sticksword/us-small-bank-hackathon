@@ -19,8 +19,8 @@ export function index(req, res) {
  */
 export function submitPayment(req, res) {
     client.payment.create({
-        amount : "1000",
-        token : "[TOKEN ID]",
+        amount : "500",
+        token : req.body.simplifyToken,
         description : "payment description",
         reference : "7a6ef6be31",
         currency : "USD"
@@ -35,7 +35,8 @@ export function submitPayment(req, res) {
      
         console.log("Payment Status: " + data.paymentStatus);
     });
-    res.send('success!');
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify({ message: 'Success!' }));
 }
 
 

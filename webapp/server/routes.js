@@ -17,6 +17,7 @@ export default function(app) {
   // Insert routes below
   app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
+  app.use('/api/consumers', require('./api/consumer'));
 
   app.use('/api/payment', require('./api/payment'));
   app.use('/api/coupon', require('./api/coupon'));

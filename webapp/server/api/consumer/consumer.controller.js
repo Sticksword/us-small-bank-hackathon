@@ -1,6 +1,6 @@
 'use strict';
 
-import User from './user.model';
+import Consumer from './consumer.model';
 import passport from 'passport';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
@@ -20,7 +20,7 @@ function handleError(res, statusCode) {
 }
 
 /**
- * Get list of users
+ * Get list of consumers
  * restriction: 'admin'
  */
 export function index(req, res) {
@@ -32,10 +32,10 @@ export function index(req, res) {
 }
 
 /**
- * Creates a new user
+ * Creates a new consumer
  */
 export function create(req, res, next) {
-  var newUser = new User(req.body);
+  var newUser = new Consumer(req.body);
   newUser.provider = 'local';
   newUser.role = 'user';
 
@@ -65,12 +65,12 @@ export function create(req, res, next) {
 }
 
 /**
- * Get a single user
+ * Get a single consumer
  */
 export function show(req, res, next) {
   var userId = req.params.id;
 
-  return User.findById(userId).exec()
+  return Consumer.findById(userId).exec()
     .then(user => {
       if (!user) {
         return res.status(404).end();
@@ -81,11 +81,11 @@ export function show(req, res, next) {
 }
 
 /**
- * Deletes a user
+ * Deletes a consumer
  * restriction: 'admin'
  */
 export function destroy(req, res) {
-  return User.findByIdAndRemove(req.params.id).exec()
+  return Consumer.findByIdAndRemove(req.params.id).exec()
     .then(function() {
       res.status(204).end();
     })
@@ -93,14 +93,14 @@ export function destroy(req, res) {
 }
 
 /**
- * Change a users password
+ * Change a consumers password
  */
 export function changePassword(req, res, next) {
   var userId = req.user._id;
   var oldPass = String(req.body.oldPassword);
   var newPass = String(req.body.newPassword);
 
-  return User.findById(userId).exec()
+  return Consumer.findById(userId).exec()
     .then(user => {
       if (user.authenticate(oldPass)) {
         user.password = newPass;
@@ -121,7 +121,7 @@ export function changePassword(req, res, next) {
 export function me(req, res, next) {
   var userId = req.user._id;
 
-  return User.findOne({ _id: userId }, '-salt -password').exec()
+  return Consumer.findOne({ _id: userId }, '-salt -password').exec()
     .then(user => { // don't ever give out the password or salt
       if (!user) {
         return res.status(401).end();

@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header">Current Coupons Offered to Consumers:</h1>
+          <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in coupons">
+            <li><a href="#">{{thing.name}} abc<button type="button" class="close" ng-click="coupon.deleteCoupon(thing)">&times;</button></a></li>
+          </ul>
+        </div>
+    </div>
+
+    <input type="text" ng-model="foo" placeholder="Discount type" />
+    <input type="text" ng-model="amount" placeholder="Discount amount" />
+    <input type="text" ng-model="description" placeholder="Description" />
+    <input type="button" ng-click="doSomething()" value="Send"/>
+    <button class="btn btn-default" type="button" class="close" ng-click="coupon.addCoupon()">Add New Coupon!</button>
+</div>
